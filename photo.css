@@ -1,0 +1,15 @@
+.childButton{
+	background: #ffdb4c;
+	transform: translateY(-50%);
+    float: middle;
+    heigth: 50px;
+    width: 50px;
+    margin: 10px;
+}
+
+#gallery{
+    width: 650px;
+    height: 500px;
+    border: 1px solid black;
+    vertical-align: middle;
+}

@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Start</title>
+        <meta charset="utf-8" />
+    </head>
+    
+    <script>
+        
+        function loaded(){
+            var iframe = document.getElementById("frmFile");
+            var values = iframe.contentWindow.document.body.childNodes[0].innerHTML.split("\n");
+            var dl = document.getElementById("listid");
+            var newContent = "";
+            for(var i = 0; i < values.length; i++)
+                newContent += "<option value='" + values[i] + "'>";
+            newContent += "";
+            dl.innerHTML = newContent;
+            
+            var input = document.getElementById("input");
+            input.addEventListener("keyup", changed, false);
+        }
+        
+        function changed(e){
+            if (e.keyCode == 13) {
+                var value = document.getElementById("input").value;
+                alert(value);
+            }
+        }
+    </script>
+    
+    <body>
+        <input list="listid" autocomplete="off" id="input">
+             <datalist id="listid">
+                 <option value="value1">
+                 <option value="lalue2">
+            </datalist>
+        </input>
+        <iframe id="frmFile" src="test.txt" onload="loaded();" style="display: none;"></iframe>
+    </body>
+</html>

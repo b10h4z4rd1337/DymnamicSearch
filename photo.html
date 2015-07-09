@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Start</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="photo.css" />
+    </head>
+    
+    <script>
+        var pos = 0;
+        var imgs = [];
+        
+        function getContent(){
+            return "browser-ie.png\n" + "chrome.png\n" + "firefox.jpg";
+        }
+
+        function loaded(){
+            var values = getContent().split("\n");
+
+            for(var i = 0; i < values.length; i++){
+                var img = new Image();
+                img.src = values[i];
+                imgs.push(img);
+            }
+            
+            var x = 500;
+            
+            function move(){
+                x-=2;
+                draw(imgs[pos], x);
+                if(x==0){
+                    x = 500;
+                    clearInterval(id);
+                    setTimeout(function(){
+                        id = setInterval(move, 1);
+                    }, 1000);
+                }
+            }
+            
+            var id = setInterval(move, 1);
+        }
+
+        function back(){
+            pos--;
+            if(pos < 0)
+                pos = imgs.length - 1;
+
+            draw(imgs[pos]);
+        }
+
+        function forward(){
+            pos++;
+            if(pos >= imgs.length)
+                pos = 0;
+
+            draw(imgs[pos]);
+        }
+
+        function draw(img, x){
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, x, 0, canvas.width, canvas.height);
+        }
+    </script>
+    
+    <body onload="loaded();">
+        <div id="gallery">
+            <button onclick="back();" class="childButton"><</button>
+                <canvas id="canvas" width="500" height="500"></canvas>
+            <button onclick="forward();" class="childButton">></button>
+        </div>
+    </body>
+</html>
